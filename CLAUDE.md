@@ -4,7 +4,7 @@ This file provides context for Claude Code when working with this repository.
 
 ## Project Overview
 
-**Hotel Logistics & Maintenance App** - A standalone system for managing hotel inventory, suppliers, purchase orders, and maintenance operations.
+**Hotel Logistics & Maintenance App** – A standalone system for managing hotel inventory, suppliers, purchase orders, and maintenance operations.
 
 ## Key Concepts
 
@@ -22,20 +22,20 @@ This file provides context for Claude Code when working with this repository.
 5. **Maintenance Tickets**: Room/asset issues with priority, assignment, and resolution tracking
 
 ### Data Model Tables
-- `inventory_items` - Stock items with categories and thresholds
-- `stock_locations` - Storage areas
-- `stock_movements` - All inventory transactions
-- `suppliers` - Vendor records
-- `purchase_orders` / `purchase_order_lines` - Procurement
-- `maintenance_tickets` - Issue tracking
-- `users` - System users with roles
+- `inventory_items` – Stock items with categories and thresholds
+- `stock_locations` – Storage areas (Main Store, Housekeeping, Bar, etc.)
+- `stock_movements` – All inventory transactions (receive, issue, transfer)
+- `suppliers` – Vendor records
+- `purchase_orders` / `purchase_order_lines` – Procurement
+- `maintenance_tickets` – Issue tracking
+- `users` – System users with roles
 
 ### Important Patterns
 
 - **Room codes**: Use format `HOTEL1-101` (hotel identifier + room number) for future HMS integration
-- **User structure**: Mirror HMS user schema (id, email, role) for future SSO
-- **Categories**: Enum values - `Linen`, `Amenities`, `F&B`, `Cleaning`
-- **Units**: Enum values - `piece`, `kg`, `litre`, `box`
+- **User structure**: Mirror HMS user schema (`id`, `email`, `role`) for future SSO
+- **Categories**: Enum values – `Linen`, `Amenities`, `F&B`, `Cleaning`
+- **Units**: Enum values – `piece`, `kg`, `litre`, `box`
 - **Priorities**: `Low`, `Medium`, `High`, `Urgent`
 - **Ticket statuses**: `Open`, `In Progress`, `Resolved`, `Closed`
 - **PO statuses**: `Draft`, `Submitted`, `Partially Delivered`, `Delivered`, `Cancelled`
@@ -44,31 +44,25 @@ This file provides context for Claude Code when working with this repository.
 
 ### When Building Features
 
-1. All stock changes must create a `stock_movement` record for audit
-2. Low-stock alerts trigger when item quantity < `min_stock_level`
-3. PO delivery should auto-update inventory via stock movements
-4. Maintenance costs should be tracked for monthly reporting
+1. All stock changes must create a `stock_movement` record for audit.
+2. Low-stock alerts trigger when item quantity < `min_stock_level`.
+3. PO delivery should auto-update inventory via stock movements.
+4. Maintenance costs should be tracked for monthly reporting.
+5. Prefer clarity and simplicity over premature optimisation – this is a v1 logistics product.
 
 ### Future Integration Points
 
 These APIs are designed but NOT implemented in v1:
-- `GET /api/forecast/linen?month=YYYY-MM` - For HMS occupancy forecasts
-- `GET /api/maintenance/status?room=ROOM_CODE` - Maintenance status for HMS
-- `GET /api/rooms` - Shared room reference list
+
+- `GET /api/forecast/linen?month=YYYY-MM` – For HMS occupancy forecasts
+- `GET /api/maintenance/status?room=ROOM_CODE` – Maintenance status for HMS
+- `GET /api/rooms` – Shared room reference list (read-only)
 
 ## File Structure
 
-```
+```text
 project_spec.md    # Full project specification
 CLAUDE.md          # This file - Claude Code context
-```
-
-## Commands
-
-(To be updated as project develops)
-
-```bash
-# Build
-# Test
-# Run
-```
+architecture.md    # System design and component interactions
+changelog.md       # Log of changes over time
+project_status.md  # Milestones, what’s done, what’s next
