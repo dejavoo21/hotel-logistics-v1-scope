@@ -17,17 +17,31 @@
   - Better reporting, role-based views, integration prep
 
 ## Completed so far
-- [YYYY-MM-DD] Created Git repo and connected to GitHub
-- [YYYY-MM-DD] Created initial `project_spec.md`
-- [YYYY-MM-DD] Created `CLAUDE.md` with project context + git & docs rules
+- [2024-12-31] Created Git repo and connected to GitHub
+- [2024-12-31] Created initial `project_spec.md`
+- [2024-12-31] Created `CLAUDE.md` with project context + git & docs rules
+- [2024-12-31] Scaffolded full MVP project structure:
+- [YYYY-MM-DD] Added shared TypeScript types for maintenance tickets and generic API responses (CreateTicketRequest, AssignTicketRequest, CloseTicketRequest, ApiResponse<T>).
+  - Monorepo with npm workspaces (frontend, backend, shared)
+  - Backend: Express + TypeScript + Drizzle ORM + SQLite
+  - Frontend: React + Vite + TypeScript + Tailwind + Shadcn/ui
+  - All API routes implemented (items, locations, movements, suppliers, POs, tickets)
+  - All frontend pages implemented with full CRUD functionality
+- [YYYY-MM-DD] Project scaffolding created (frontend, backend, shared workspaces).
+- [YYYY-MM-DD] Installed npm dependencies and pushed initial database schema.
+- Backend dev command: `npm run dev:backend` (port 3001)
+- Frontend dev command: `npm run dev:frontend` (port 5173)
+
 
 ## Current focus
-- Confirm tech stack and create an implementation plan for the MVP.
+- Install dependencies and run initial setup
+- Push database schema with `npm run db:push`
+- Seed initial data (locations, users)
 
 ## Next up
-- Approve stack choice.
-- Let Claude scaffold the project structure.
-- Implement the first MVP feature (likely inventory items + stock locations).
+- Test all MVP features end-to-end
+- Add seed script for demo data
+- Add basic validation with Zod
 
 ### Estimated Build Order (MVP)
 

@@ -58,11 +58,57 @@ These APIs are designed but NOT implemented in v1:
 - `GET /api/maintenance/status?room=ROOM_CODE` – Maintenance status for HMS
 - `GET /api/rooms` – Shared room reference list (read-only)
 
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18 + TypeScript |
+| UI Components | Shadcn/ui + Tailwind CSS |
+| Backend | Node.js + Express + TypeScript |
+| Database | SQLite (via better-sqlite3) |
+| ORM | Drizzle ORM |
+| Build Tool | Vite |
+
+## Commands
+
+```bash
+# Install dependencies (from root)
+npm install
+
+# Run backend (port 3001)
+npm run dev:backend
+
+# Run frontend (port 5173)
+npm run dev:frontend
+
+# Push database schema
+npm run db:push
+
+# Open Drizzle Studio (DB GUI)
+npm run db:studio
+```
+
 ## File Structure
 
 ```text
-project_spec.md    # Full project specification
-CLAUDE.md          # This file - Claude Code context
-architecture.md    # System design and component interactions
-changelog.md       # Log of changes over time
-project_status.md  # Milestones, what’s done, what’s next
+hotel-logistics/
+├── frontend/               # React + Vite frontend
+│   ├── src/
+│   │   ├── components/     # UI components (shadcn/ui)
+│   │   ├── pages/          # Page components
+│   │   ├── lib/            # API client, utils
+│   │   └── App.tsx
+│   └── package.json
+├── backend/                # Express API server
+│   ├── src/
+│   │   ├── routes/         # API route handlers
+│   │   ├── db/             # Drizzle schema
+│   │   └── index.ts
+│   ├── data/               # SQLite database
+│   └── package.json
+├── shared/                 # Shared TypeScript types
+│   └── src/index.ts
+├── project_spec.md
+├── project_status.md
+├── CLAUDE.md
+└── package.json            # Workspace root
