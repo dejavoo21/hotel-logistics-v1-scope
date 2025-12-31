@@ -28,3 +28,15 @@
 - Approve stack choice.
 - Let Claude scaffold the project structure.
 - Implement the first MVP feature (likely inventory items + stock locations).
+
+### Estimated Build Order (MVP)
+
+1. Project scaffolding (Phase 1)
+2. Database schema (Phase 2)
+3. Locations API + UI (simplest feature)
+4. Items API + UI
+5. Stock movements API + UI
+6. Suppliers API + UI
+7. Purchase orders API + UI
+8. Maintenance tickets API + UI
+9. Integration & testing (Phase 5)
