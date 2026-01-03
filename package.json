@@ -14,6 +14,14 @@
     "build": "npm run build --workspaces --if-present",
     "db:push": "npm run db:push -w backend",
     "db:studio": "npm run db:studio -w backend",
-    "db:seed": "npm run db:seed -w backend"
+    "db:seed": "npm run db:seed -w backend",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:watch": "playwright test --watch",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "husky": "^9.1.7"
   }
 }
