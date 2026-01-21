@@ -1,0 +1,114 @@
+# CLAUDE.md
+
+This file provides context for Claude Code when working with this repository.
+
+## Project Overview
+
+**Hotel Logistics & Maintenance App** – A standalone system for managing hotel inventory, suppliers, purchase orders, and maintenance operations.
+
+## Key Concepts
+
+### User Roles
+- **Storekeeper/Purchasing**: Inventory and PO management
+- **Maintenance**: Ticket creation and resolution
+- **Hotel Admin/Owner**: Full system access
+
+### Core Domains
+
+1. **Inventory**: Items tracked by category (Linen, Amenities, F&B, Cleaning) with min/max stock levels
+2. **Stock Movements**: Receive (from supplier), Issue (to department), Transfer (between locations)
+3. **Stock Locations**: Main Store, Housekeeping, Bar
+4. **Suppliers & Purchase Orders**: Vendor management and procurement workflow
+5. **Maintenance Tickets**: Room/asset issues with priority, assignment, and resolution tracking
+
+### Data Model Tables
+- `inventory_items` – Stock items with categories and thresholds
+- `stock_locations` – Storage areas (Main Store, Housekeeping, Bar, etc.)
+- `stock_movements` – All inventory transactions (receive, issue, transfer)
+- `suppliers` – Vendor records
+- `purchase_orders` / `purchase_order_lines` – Procurement
+- `maintenance_tickets` – Issue tracking
+- `users` – System users with roles
+
+### Important Patterns
+
+- **Room codes**: Use format `HOTEL1-101` (hotel identifier + room number) for future HMS integration
+- **User structure**: Mirror HMS user schema (`id`, `email`, `role`) for future SSO
+- **Categories**: Enum values – `Linen`, `Amenities`, `F&B`, `Cleaning`
+- **Units**: Enum values – `piece`, `kg`, `litre`, `box`
+- **Priorities**: `Low`, `Medium`, `High`, `Urgent`
+- **Ticket statuses**: `Open`, `In Progress`, `Resolved`, `Closed`
+- **PO statuses**: `Draft`, `Submitted`, `Partially Delivered`, `Delivered`, `Cancelled`
+
+## Development Guidelines
+
+### When Building Features
+
+1. All stock changes must create a `stock_movement` record for audit.
+2. Low-stock alerts trigger when item quantity < `min_stock_level`.
+3. PO delivery should auto-update inventory via stock movements.
+4. Maintenance costs should be tracked for monthly reporting.
+5. Prefer clarity and simplicity over premature optimisation – this is a v1 logistics product.
+
+### Future Integration Points
+
+These APIs are designed but NOT implemented in v1:
+
+- `GET /api/forecast/linen?month=YYYY-MM` – For HMS occupancy forecasts
+- `GET /api/maintenance/status?room=ROOM_CODE` – Maintenance status for HMS
+- `GET /api/rooms` – Shared room reference list (read-only)
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18 + TypeScript |
+| UI Components | Shadcn/ui + Tailwind CSS |
+| Backend | Node.js + Express + TypeScript |
+| Database | SQLite (via better-sqlite3) |
+| ORM | Drizzle ORM |
+| Build Tool | Vite |
+
+## Commands
+
+```bash
+# Install dependencies (from root)
+npm install
+
+# Run backend (port 3001)
+npm run dev:backend
+
+# Run frontend (port 5173)
+npm run dev:frontend
+
+# Push database schema
+npm run db:push
+
+# Open Drizzle Studio (DB GUI)
+npm run db:studio
+```
+
+## File Structure
+
+```text
+hotel-logistics/
+├── frontend/               # React + Vite frontend
+│   ├── src/
+│   │   ├── components/     # UI components (shadcn/ui)
+│   │   ├── pages/          # Page components
+│   │   ├── lib/            # API client, utils
+│   │   └── App.tsx
+│   └── package.json
+├── backend/                # Express API server
+│   ├── src/
+│   │   ├── routes/         # API route handlers
+│   │   ├── db/             # Drizzle schema
+│   │   └── index.ts
+│   ├── data/               # SQLite database
+│   └── package.json
+├── shared/                 # Shared TypeScript types
+│   └── src/index.ts
+├── project_spec.md
+├── project_status.md
+├── CLAUDE.md
+└── package.json            # Workspace root
