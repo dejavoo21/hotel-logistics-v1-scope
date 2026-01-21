@@ -161,7 +161,7 @@ These endpoints are designed but not yet implemented:
 
 | Endpoint | Purpose |
 |----------|---------|
-| `GET /api/forecast/linen?month=YYYY-MM` | Receive occupancy forecasts from HMS |
+| `GET /api/forecast/linen?month=YYYY-MM` | Retrieve occupancy forecasts from HMS |
 | `GET /api/maintenance/status?room=ROOM_CODE` | Provide maintenance status to HMS |
 | `GET /api/rooms` | Shared room reference list (read-only) |
 
