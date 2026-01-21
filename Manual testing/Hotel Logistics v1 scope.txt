@@ -1,0 +1,115 @@
+3. App #2 – Hotel Logistics (v1 scope)
+
+Goal: Control stock, suppliers and maintenance without being tied to front desk.
+
+Core roles
+
+Storekeeper / Purchasing
+
+Maintenance
+
+Hotel Admin/Owner
+
+v1 features
+
+Inventory items
+
+Item name, category (Linen / Amenities / F&B / Cleaning)
+
+Unit (piece, kg, litre, box)
+
+Min & max stock levels
+
+Current stock per store (Main store, Housekeeping, Bar)
+
+Stock movements
+
+Receive stock (from supplier)
+
+Issue stock (to housekeeping, bar, restaurant)
+
+Transfer between locations
+
+Suppliers & Purchase Orders
+
+Supplier list
+
+Create purchase order (items, qty, price, expected date)
+
+Mark as delivered & update stock
+
+Maintenance tickets
+
+Create ticket: Room/Asset, problem description, priority, status
+
+Assign to maintenance staff
+
+Close with resolution notes & cost
+
+Logistics dashboard
+
+Low-stock alerts
+
+Open purchase orders
+
+Open maintenance tickets
+
+Monthly spend by category
+
+Very small data model (Logistics)
+
+inventory_items
+
+stock_locations
+
+stock_movements
+
+suppliers
+
+purchase_orders / purchase_order_lines
+
+maintenance_tickets
+
+(Optionally) assets & rooms reference from HMS later
+
+4. How to future-proof the integration
+
+Even though you’re building separately, do these small things now so they can connect later:
+
+Use a shared ID pattern
+
+Every room should have a unique room_code (e.g. HOTEL1-101)
+
+Logistics can store room_code on maintenance tickets even before integration.
+
+Shared user concept
+
+Use similar users table in both apps (id, email, role)
+
+Later you can move to a single auth service or SSO if you want.
+
+Plan 2–3 APIs for “later”
+Don’t implement yet, just design them in a doc:
+
+HMS → Logistics:
+
+/api/forecast/linen?month=2025-07 (send occupancy forecast)
+
+Logistics → HMS:
+
+/api/maintenance/status?room=HOTEL1-101
+
+Shared:
+
+/api/rooms (read-only list of rooms)
+
+That way when you’re ready, you aren’t starting from zero.
+
+5. Concrete next move
+
+If you like this plan, I’d suggest:
+
+Pick HMS or Logistics to do first (my vote: HMS – easier to demo and feels “alive” quickly).
+
+
+
